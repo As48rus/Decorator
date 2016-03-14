@@ -6,34 +6,34 @@ using System.Threading.Tasks;
 
 namespace Decorator
 {
-    public class DecoratorStream : AbstractStream
+    class DecoratorStream : IStream
     {
-        protected AbstractStream _stream;
+        public IStream _stream;
 
         public DecoratorStream() { }
 
-        public DecoratorStream(AbstractStream stream)
+        public DecoratorStream(IStream stream)
         {
             _stream = stream;
         }
 
-        public void SetDecoratorStream(AbstractStream stream)
+        public  void SetDecoratorStream(IStream stream)
         {
             _stream = stream;
         }
 
-        public override string[] Read()
+        public virtual TextForFile Read(TextForFile textFile)
         {
             if(_stream != null)
-                _stream.Read();
+                _stream.Read(textFile);
 
-            return _txtFile;
+            return textFile;
         }
 
-        public override void Wrire(string text)
+        public virtual void Wrire(TextForFile textFile)
         {
             if (_stream != null)
-                _stream.Wrire(text);
+                _stream.Wrire(textFile);
         }
     }
 }

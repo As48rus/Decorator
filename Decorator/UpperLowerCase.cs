@@ -6,37 +6,38 @@ using System.Threading.Tasks;
 
 namespace Decorator
 {
-    public class UpperLowerCase : DecoratorStream
+    class UpperLowerCase : DecoratorStream
     {
-        public UpperLowerCase() { }
-        public UpperLowerCase(AbstractStream stream) : base(stream)
+        public UpperLowerCase(IStream stream) : base(stream)
         {
-            //_stream = stream;
         }
-        public override string[] Read()
+        public override TextForFile Read(TextForFile textFile)
         {
-            base.Read();
-            UpperLower();
-            return _txtFile;
+            base.Read(textFile);
+            if (!textFile._isMultyLine)
+                textFile.ToMultyLine();
+
+            UpperLower(textFile);
+            return textFile;
         }
 
-        public override void Wrire(string text)
+        public override void Wrire(TextForFile textFile)
         {
-            if(!_isMultyLine)
-                ToMultyLine(text);
-            UpperLower();
-            base.Wrire(text);
+            if(!textFile._isMultyLine)
+                textFile.ToMultyLine();
+            UpperLower(textFile);
+            base.Wrire(textFile);
         }
 
-        public void UpperLower()
+        public void UpperLower(TextForFile textFile)
         {
-            for (int i = 0; i < _txtFile.Length; i++)
+            for (int i = 0; i < textFile._txtFile.Length; i++)
             {
-                _txtFile[i] = _txtFile[i].ToLower();
-                char firsSymbol = _txtFile[i].First();
+                textFile._txtFile[i] = textFile._txtFile[i].ToLower();
+                char firsSymbol = textFile._txtFile[i].First();
                 firsSymbol = (char)(firsSymbol - 32);
-                _txtFile[i].Remove(0);
-                _txtFile[i] = firsSymbol + _txtFile[i];
+                textFile._txtFile[i] = textFile._txtFile[i].Remove(0,1);
+                textFile._txtFile[i] = firsSymbol + textFile._txtFile[i];
             }
         }
 
