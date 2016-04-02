@@ -10,7 +10,7 @@ namespace Decorator
     {
         static void Main(string[] args)
         {
-            // TEST
+            // TEST asdfsdfsdfsdfsd
             IStream stream = new Stream();
             TextForFile textFile = new TextForFile();
             args = new string[5];
