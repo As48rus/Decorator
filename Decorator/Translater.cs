@@ -9,30 +9,24 @@ namespace Decorator
     class Translater : DecoratorStream
     {
         public Translater() { }
-        public Translater(IStream stream) : base(stream)
+        public Translater(AbstractStream stream) : base(stream)
         {
 
         }
-        public override TextForFile Read(TextForFile textFile)
+        public override string[] Read()
         {
-            base.Read(textFile);
-            if (!textFile._isMultyLine)
-                textFile.ToMultyLine();
-
-            //Translate(textFile);
-            return textFile;
+            base.Read();
+            //Translate();
+            return _txtFile;
         }
 
-        public override void Wrire(TextForFile textFile)
+        public override void Wrire(string text)
         {
-            if (!textFile._isMultyLine)
-                textFile.ToMultyLine();
-
-            //Translate(textFile);
-            base.Wrire(textFile);
+            //Translate();
+            base.Wrire(text);
         }
 
-        private void Translate(TextForFile textFile)
+        private void Translate()
         {
             throw new NotImplementedException();
         }

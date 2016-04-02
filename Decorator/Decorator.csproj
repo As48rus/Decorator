@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IStream.cs" />
+    <Compile Include="AbstractStream.cs" />
     <Compile Include="DecoratorStream.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -54,7 +54,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Stream.cs" />
-    <Compile Include="TextForFile.cs" />
     <Compile Include="Translater.cs" />
     <Compile Include="UpperLowerCase.cs" />
   </ItemGroup>

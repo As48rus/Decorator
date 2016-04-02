@@ -6,21 +6,20 @@ using System.Threading.Tasks;
 
 namespace Decorator
 {
-    public class TextForFile
+    public abstract class AbstractStream
     {
         public string[] _txtFile { get; set; }
-        public string _text { get; set; }
-        public bool _isMultyLine = false;
-
-        public void ToMultyLine()
+        public abstract void Wrire(string text);
+        public abstract string[] Read();
+        protected bool _isMultyLine = false;
+        protected void ToMultyLine(string text)
         {
-            _txtFile = _text.Split(new string[] { ". " }, StringSplitOptions.RemoveEmptyEntries);
+            _txtFile = text.Split(new string[] { ". " }, StringSplitOptions.RemoveEmptyEntries);
 
             for (int i = 0; i < _txtFile.Length - 1; i++)
                 _txtFile[i] += ".";
 
             _isMultyLine = true;
         }
-
     }
 }

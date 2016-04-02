@@ -7,38 +7,34 @@ using System.IO;
 
 namespace Decorator
 {
-    public class Stream : IStream
+    public class Stream : AbstractStream
     {
         //Полей и свойств класса AbstractStream не существует
          
         string _fileName = @"text.txt";
-        public TextForFile Read(TextForFile textFile)
+        public override string[] Read()
         {
             using (StreamReader sr = new StreamReader(_fileName, Encoding.UTF8))
             {
-                //int i = 0;
-                //while(!sr.EndOfStream)
-                //    textFile._txtFile[i++] = sr.ReadLine();
-                textFile._text = sr.ReadToEnd();
+                int i = 0;
+                while(!sr.EndOfStream)
+                    _txtFile[i++] = sr.ReadLine();
 
+                return _txtFile;
             }
-            if (!textFile._isMultyLine)
-                textFile.ToMultyLine();
-
-            return textFile;
         }
 
-        public void Wrire(TextForFile textFile)
+        public override void Wrire(string text)
         {
-            if (!textFile._isMultyLine)
-                textFile.ToMultyLine();
+            //if (!_isMultyLine)
+            //    ToMultyLine(text);
 
             using (StreamWriter sw = new StreamWriter(_fileName, false, Encoding.UTF8))
             {
 
-                for (int i = 0; i < textFile._txtFile.Length; i++)
+                for (int i = 0; i < _txtFile.Length; i++)
                 {
-                    sw.WriteLine(textFile._txtFile[i]); 
+                    sw.WriteLine(_txtFile[i]); 
                 }
             }
         }
